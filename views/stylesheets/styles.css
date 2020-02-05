@@ -1,0 +1,93 @@
+*, a, .footer-copyright {
+    color: #00FFFF;
+    font-family: 'Oswald', 'Times New Roman', Times, serif;
+}
+
+label {
+    padding: 5px;
+    color: white;
+}
+
+.footer-copyright  {
+    background-color: #222;
+    margin-top: 10px
+}
+
+a:hover {
+    color: #999
+}
+
+body {
+    background-color: #333
+}
+
+body p {
+    color: white
+}
+
+nav, .container {
+    background-color: #222;
+}
+
+.container {
+    margin-top: 10px;
+}
+
+nav {
+    border-bottom: #999;
+}
+
+.important {
+    font-family: 'Amatic SC', cursive;
+}
+
+.navbar-brand {
+    font-size: 30px
+}
+
+.btn-primary {
+    background-color: #555;
+    border-color: black
+}
+
+.btn-primary:hover {
+    background-color: #777
+}
+
+.container {
+    padding: 10px;
+}
+
+hr {
+    color: #777
+}
+
+.carousel {
+    height: 75vh;
+}
+
+.carousel img {
+    object-fit: scale-down;
+    height: 75vh;
+}
+
+.form-control {
+    background-color: #333
+}
+
+.btn {
+    margin: 10px;
+}
+
+.navbar-dark a.navbar-brand, #navbarSupportedContent li a.nav-link {
+    color: #00FFFF
+}
+
+.navbar-dark .navbar-toggler  {
+    color: #00FFFF;
+    border-color: #00FFFF;
+}
+
+.container p {
+    padding: 20px;
+}
