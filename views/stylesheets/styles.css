@@ -91,3 +91,39 @@ hr {
 .container p {
     padding: 20px;
 }
+
+.sub-container {
+    background-color: #333;
+    height: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.learn-more {
+    float: right;
+    padding: 10px;
+    background-color: black;
+    border: 2px solid black;
+    margin-bottom: 100px;
+}
+
+.learn-more:hover {
+    background-color: #333;
+    color: inherit;
+    text-decoration: none;
+}
+
+.thumbnail {
+    width: 50%;
+    margin: auto;
+    display: block;
+}
+
+.content {
+    max-height: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    clear: both;
+    text-align: center;
+}
