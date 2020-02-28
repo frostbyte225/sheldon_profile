@@ -101,6 +101,41 @@
             </article>
         </div>
     </div>
+    <div class="container" id="projects-section">
+        <h2 class="display-4 important text-left">Projects</h2>
+        <label for="sort-by">Sort by: </label>
+
+        <select name="sort-by" id="sort-by">
+            <option value="date-added" id='sort-by-date'>Date Added</option>
+            <option value="alphabetical" id='sort-by-alpha'>Alphabetical</option>
+        </select>
+        <div class="card-group" id='project-card-container'>
+            <div class="card">
+              <img class="card-img-top" src="..." alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-muted">Last updated <span class="updated text-muted">3</span> mins ago</small></p>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="..." alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text"><small class="text-muted">Last updated <span class="updated text-muted">5</span> mins ago</small></p>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="..." alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                <p class="card-text"><small class="text-muted">Last updated <span class="updated text-muted">10</span> mins ago</small></p>
+              </div>
+            </div>
+          </div>
+    </div>
     <div class="container" id='about-section'>
         <h2 class="display-4 important text-left">About Me</h2>
         <p class="lead text-left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed magna sed dui suscipit aliquam. Phasellus in consequat dolor. Donec consectetur ex lacus, eu pharetra diam pulvinar sit amet. Nullam tristique nunc in massa scelerisque commodo. Vivamus non nibh dui. Nam volutpat justo id pretium rutrum. Sed lobortis vehicula laoreet. Ut at pharetra quam. Nullam in facilisis enim, at luctus turpis. Aenean rhoncus, nisi ut viverra luctus, lorem urna sollicitudin sem, consequat sagittis arcu tortor ut elit. Sed tortor est, vestibulum eget varius at, pretium vel lorem. Phasellus luctus libero in ultrices malesuada. Nulla egestas vestibulum efficitur. Vivamus at ante ultrices, pellentesque leo nec, vehicula ex. </p>
@@ -142,5 +177,6 @@
     <script src="./views/js/jquery.min.js"></script>
     <script src="./views/js/bootstrap.min.js"></script>
     <script src="./views/js/popper.min.js"></script>
+    <script src='./views/js/sort_projects.js'></script>
 </body>
 </html>

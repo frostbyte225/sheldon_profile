@@ -130,6 +130,16 @@ hr {
 
 .content-official {
     text-align: center;
-    clear: both;
-    
+    clear: both;   
+}
+
+#projects-section .card, option{
+    background-color: #222;
+    border: 2px black solid;
+    margin: 0 5px
+}
+
+select {
+    background-color: black;
+    border: 2px black solid;
 }
