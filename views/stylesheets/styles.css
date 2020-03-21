@@ -143,3 +143,35 @@ select {
     background-color: black;
     border: 2px black solid;
 }
+
+.card {
+    background-color: #777;
+    text-align: center;
+}
+
+.card-footer {
+    color: #555
+}
+
+.button-container button{
+    margin: auto;
+}
+
+.button-container button:hover, .button-container button:target {
+    outline-color: #00FFFF;
+    background-color: #00FFFF;
+    color: black;
+    border-color: #00FFFF;
+}
+
+.button-container button:active {
+    outline-color: #00FFFF;
+    background-color: #00FFFF;
+    color: black;
+    border-color: #00FFFF;
+}
+
+.card img {
+    max-width: inherit;
+    max-height: inherit;
+}
