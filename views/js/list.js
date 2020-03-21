@@ -109,7 +109,16 @@ function reloadHTML() {
 
 }
 
-listContainer.innerHTML = `
+if (myStorage.getItem('listStorage') == null){
+    renderPage();
+} else {
+    renderPage();
+    reloadHTML();
+}
+
+
+function renderPage() {
+    listContainer.innerHTML = `
     <div class="card">
     <img src="../img/list_images/list_img_01.jpg" class='card-header col-lg-12' alt="There is supposed to be an image here">
     <div class="card-body">Powerlines and communication lines enable us to become more connected as a society and bridge the gap 
@@ -153,3 +162,4 @@ listContainer.innerHTML = `
     </div>
     <div class="card-footer">Created by: Sheldon</div>
     </div>`
+}
