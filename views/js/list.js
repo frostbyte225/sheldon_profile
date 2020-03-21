@@ -1,6 +1,8 @@
 myStorage = window.localStorage
 
 listItem = []
+pushMoreElements()
+myStorage.setItem('listItem', JSON.stringify(listItem))
 
 listContainer = document.getElementById('list-container')
 addElementButton = document.getElementById('add-element')
@@ -106,60 +108,123 @@ function reloadHTML() {
     cardDiv.appendChild(cardFooter)
 
     listContainer.appendChild(cardDiv)
-
+    console.log('looped')
 }
 
-if (myStorage.getItem('listStorage') == null){
-    renderPage();
-} else {
-    renderPage();
-    reloadHTML();
+function reloadAllHTML() {
+    arr = JSON.parse(myStorage.getItem('listItem'))
+    // element = arr[arr.length - 1]
+    arr.forEach(element => {
+        cardDiv = document.createElement('div')
+        cardDiv.classList.add('card')
+    
+        imgContainer = document.createElement('img')
+        imgContainer.classList.add('card-header')
+        imgContainer.classList.add('col-lg-12')
+        imgContainer.src = element.file
+        imgContainer.setAttribute('alt', 'There is supposed to be an image here')
+    
+        cardBodyDiv = document.createElement('div')
+        cardBodyDiv.classList.add('card-body')
+    
+        descriptionText = document.createTextNode(element.desc)
+    
+        cardBodyDiv.appendChild(descriptionText)
+    
+        cardFooter = document.createElement('div')
+        cardFooter.classList.add('card-footer')
+    
+        authorText = document.createTextNode('Created by: ' + element.name)
+        cardFooter.appendChild(authorText)
+    
+        cardDiv.appendChild(imgContainer)
+        cardDiv.appendChild(cardBodyDiv)
+        cardDiv.appendChild(cardFooter)
+    
+        listContainer.appendChild(cardDiv)
+        console.log('looped')
+    })
 }
 
+reloadAllHTML();
 
-function renderPage() {
-    listContainer.innerHTML = `
-    <div class="card">
-    <img src="../img/list_images/list_img_01.jpg" class='card-header col-lg-12' alt="There is supposed to be an image here">
-    <div class="card-body">Powerlines and communication lines enable us to become more connected as a society and bridge the gap 
-        between borders.
-    </div>
-    <div class="card-footer">Created by: Sheldon</div>
-    </div>
-    <div class="card">
-    <img src="../img/list_images/list_img_02.jpg" class='card-header col-lg-12' alt="There is supposed to be an image here">
-    <div class="card-body">
-        Aliens lie somewhere between fact and fiction. You could think of them as a placeholder for explainations that we don't have yet.
-    </div>
-    <div class="card-footer">Created by: Sheldon</div>
-    </div>
-    <div class="card">
-    <img src="../img/list_images/list_img_03.jpg" class='card-header col-lg-12' alt="There is supposed to be an image here">
-    <div class="card-body">I have an idea, why don't we all try to encourage others with constructive feedback instead 
-        of always attacking people to progress our own agendas. Imaging how much more successful this world would be.</div>
-    <div class="card-footer">Created by: Sheldon</div>
-    </div>
-    <div class="card">
-    <img src="../img/list_images/list_img_04.jpg" class='card-header col-lg-12' alt="There is supposed to be an image here">
-    <div class="card-body">
-        There's something truly beautiful about purple storms.
-    </div>
-    <div class="card-footer">Created by: Sheldon</div>
-    </div>
-    <div class="card">
-    <img src="../img/list_images/list_img_05.jpg" class='card-header col-lg-12' alt="There is supposed to be an image here">
-    <div class="card-body">
-        Computer chips are the future of all things progressive in technology. However, innovation away from these marvels should
-        not be feared. The future is unkown, and we should all be ready to embrace whatever change comes our way.
-    </div>
-    <div class="card-footer">Created by: Sheldon</div>
-    </div>
-    <div class="card">
-    <img src="../img/list_images/lilst_img_06.jpg" class='card-header col-lg-12' alt="There is supposed to be an image here">
-    <div class="card-body">
-        “You won’t ever know if what you did personally helped … When the best way to save lives is to prevent a disease 
-        rather than treat it, success often looks like an overreaction.”
-    </div>
-    <div class="card-footer">Created by: Sheldon</div>
-    </div>`
+function pushMoreElements() {
+    listItem.push({
+        'file'  : '../img/list_images/list_img_01.jpg',
+        'desc'  : 'Powerlines and communication lines enable us to become more connected as a society and bridge the gap between borders.',
+        'name'  : 'Sheldon'
+    })
+    listItem.push(
+    {
+        'file'  : '../img/list_images/list_img_02.jpg',
+        'desc'  : 'Aliens lie somewhere between fact and fiction. You could think of them as a placeholder for explainations that we don\'t have yet.',
+        'name'  : 'Sheldon'
+    })
+    listItem.push({
+        'file'  : '../img/list_images/list_img_03.jpg',
+        'desc'  : 'I have an idea, why don\'t we all try to encourage others with constructive feedback instead of always attacking people to progress our own agendas. Imaging how much more successful this world would be.',
+        'name'  : 'Sheldon'
+    })
+    listItem.push({
+        'file'  : '../img/list_images/list_img_04.jpg',
+        'desc'  : ' There\'s something truly beautiful about purple storms.',
+        'name'  : 'Sheldon'
+    })
+    listItem.push({
+        'file'  : '../img/list_images/list_img_05.jpg',
+        'desc'  : 'Computer chips are the future of all things progressive in technology. However, innovation away from these marvels should not be feared. The future is unkown, and we should all be ready to embrace whatever change comes our way.',
+        'name'  : 'Sheldon'
+    })
+    listItem.push({
+        'file'  : '../img/list_images/lilst_img_06.jpg',
+        'desc'  : '“You won’t ever know if what you did personally helped … When the best way to save lives is to prevent a disease rather than treat it, success often looks like an overreaction.”',
+        'name'  : 'Sheldon'
+    })
 }
+
+// function renderPage() {
+//     listContainer.innerHTML = `
+//     <div class="card">
+//     <img src="../img/list_images/list_img_01.jpg" class='card-header col-lg-12' alt="There is supposed to be an image here">
+//     <div class="card-body">Powerlines and communication lines enable us to become more connected as a society and bridge the gap 
+//         between borders.
+//     </div>
+//     <div class="card-footer">Created by: Sheldon</div>
+//     </div>
+//     <div class="card">
+//     <img src="../img/list_images/list_img_02.jpg" class='card-header col-lg-12' alt="There is supposed to be an image here">
+//     <div class="card-body">
+//         Aliens lie somewhere between fact and fiction. You could think of them as a placeholder for explainations that we don't have yet.
+//     </div>
+//     <div class="card-footer">Created by: Sheldon</div>
+//     </div>
+//     <div class="card">
+//     <img src="../img/list_images/list_img_03.jpg" class='card-header col-lg-12' alt="There is supposed to be an image here">
+//     <div class="card-body">I have an idea, why don't we all try to encourage others with constructive feedback instead 
+//         of always attacking people to progress our own agendas. Imaging how much more successful this world would be.</div>
+//     <div class="card-footer">Created by: Sheldon</div>
+//     </div>
+//     <div class="card">
+//     <img src="../img/list_images/list_img_04.jpg" class='card-header col-lg-12' alt="There is supposed to be an image here">
+//     <div class="card-body">
+//         There's something truly beautiful about purple storms.
+//     </div>
+//     <div class="card-footer">Created by: Sheldon</div>
+//     </div>
+//     <div class="card">
+//     <img src="../img/list_images/list_img_05.jpg" class='card-header col-lg-12' alt="There is supposed to be an image here">
+//     <div class="card-body">
+//         Computer chips are the future of all things progressive in technology. However, innovation away from these marvels should
+//         not be feared. The future is unkown, and we should all be ready to embrace whatever change comes our way.
+//     </div>
+//     <div class="card-footer">Created by: Sheldon</div>
+//     </div>
+//     <div class="card">
+//     <img src="../img/list_images/lilst_img_06.jpg" class='card-header col-lg-12' alt="There is supposed to be an image here">
+//     <div class="card-body">
+//         “You won’t ever know if what you did personally helped … When the best way to save lives is to prevent a disease 
+//         rather than treat it, success often looks like an overreaction.”
+//     </div>
+//     <div class="card-footer">Created by: Sheldon</div>
+//     </div>`
+// }
