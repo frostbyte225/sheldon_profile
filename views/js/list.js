@@ -1,8 +1,26 @@
 myStorage = window.localStorage
+currentMinPage = 0
+elementPerPage = 6
+currentPage = 1
+numberOfPages = 0
 
 listItem = []
+listPagination = document.getElementById('list-pagination')
+createPages()
+
 pushMoreElements()
 myStorage.setItem('listItem', JSON.stringify(listItem))
+
+sortByAuthorOption  = document.getElementById('sort-by-author')
+sortByDescOption    = document.getElementById('sort-by-desc')
+
+sortByAuthorOption.addEventListener('click', () => {
+    sortByAuthor()
+})
+
+sortByDescOption.addEventListener('click', () => {
+    sortByDesc()   
+})
 
 listContainer = document.getElementById('list-container')
 addElementButton = document.getElementById('add-element')
@@ -78,7 +96,8 @@ function createFormListener() {
     })
 }
 
-function reloadHTML() {
+function  reloadHTML() {
+
     arr = JSON.parse(myStorage.getItem('listItem'))
     element = arr[arr.length - 1]
     cardDiv = document.createElement('div')
@@ -108,12 +127,11 @@ function reloadHTML() {
     cardDiv.appendChild(cardFooter)
 
     listContainer.appendChild(cardDiv)
-    console.log('looped')
 }
 
 function reloadAllHTML() {
+    listContainer.innerHTML = ``
     arr = JSON.parse(myStorage.getItem('listItem'))
-    // element = arr[arr.length - 1]
     arr.forEach(element => {
         cardDiv = document.createElement('div')
         cardDiv.classList.add('card')
@@ -142,7 +160,6 @@ function reloadAllHTML() {
         cardDiv.appendChild(cardFooter)
     
         listContainer.appendChild(cardDiv)
-        console.log('looped')
     })
 }
 
@@ -150,81 +167,96 @@ reloadAllHTML();
 
 function pushMoreElements() {
     listItem.push({
-        'file'  : '../img/list_images/list_img_01.jpg',
+        'name'  : 'Sheldon',
         'desc'  : 'Powerlines and communication lines enable us to become more connected as a society and bridge the gap between borders.',
-        'name'  : 'Sheldon'
+        'file'  : '../img/list_images/list_img_01.jpg'
     })
     listItem.push(
     {
-        'file'  : '../img/list_images/list_img_02.jpg',
+        'name'  : 'Sheldon',
         'desc'  : 'Aliens lie somewhere between fact and fiction. You could think of them as a placeholder for explainations that we don\'t have yet.',
-        'name'  : 'Sheldon'
+        'file'  : '../img/list_images/list_img_02.jpg'
     })
     listItem.push({
-        'file'  : '../img/list_images/list_img_03.jpg',
+        'name'  : 'Sheldon',
         'desc'  : 'I have an idea, why don\'t we all try to encourage others with constructive feedback instead of always attacking people to progress our own agendas. Imaging how much more successful this world would be.',
-        'name'  : 'Sheldon'
+        'file'  : '../img/list_images/list_img_03.jpg'
     })
     listItem.push({
-        'file'  : '../img/list_images/list_img_04.jpg',
+        'name'  : 'Sheldon',
         'desc'  : ' There\'s something truly beautiful about purple storms.',
-        'name'  : 'Sheldon'
+        'file'  : '../img/list_images/list_img_04.jpg'
     })
     listItem.push({
-        'file'  : '../img/list_images/list_img_05.jpg',
+        'name'  : 'Sheldon',
         'desc'  : 'Computer chips are the future of all things progressive in technology. However, innovation away from these marvels should not be feared. The future is unkown, and we should all be ready to embrace whatever change comes our way.',
-        'name'  : 'Sheldon'
+        'file'  : '../img/list_images/list_img_05.jpg'
     })
     listItem.push({
-        'file'  : '../img/list_images/lilst_img_06.jpg',
+        'name'  : 'Sheldon',
         'desc'  : '“You won’t ever know if what you did personally helped … When the best way to save lives is to prevent a disease rather than treat it, success often looks like an overreaction.”',
-        'name'  : 'Sheldon'
+        'file'  : '../img/list_images/lilst_img_06.jpg'
     })
 }
 
-// function renderPage() {
-//     listContainer.innerHTML = `
-//     <div class="card">
-//     <img src="../img/list_images/list_img_01.jpg" class='card-header col-lg-12' alt="There is supposed to be an image here">
-//     <div class="card-body">Powerlines and communication lines enable us to become more connected as a society and bridge the gap 
-//         between borders.
-//     </div>
-//     <div class="card-footer">Created by: Sheldon</div>
-//     </div>
-//     <div class="card">
-//     <img src="../img/list_images/list_img_02.jpg" class='card-header col-lg-12' alt="There is supposed to be an image here">
-//     <div class="card-body">
-//         Aliens lie somewhere between fact and fiction. You could think of them as a placeholder for explainations that we don't have yet.
-//     </div>
-//     <div class="card-footer">Created by: Sheldon</div>
-//     </div>
-//     <div class="card">
-//     <img src="../img/list_images/list_img_03.jpg" class='card-header col-lg-12' alt="There is supposed to be an image here">
-//     <div class="card-body">I have an idea, why don't we all try to encourage others with constructive feedback instead 
-//         of always attacking people to progress our own agendas. Imaging how much more successful this world would be.</div>
-//     <div class="card-footer">Created by: Sheldon</div>
-//     </div>
-//     <div class="card">
-//     <img src="../img/list_images/list_img_04.jpg" class='card-header col-lg-12' alt="There is supposed to be an image here">
-//     <div class="card-body">
-//         There's something truly beautiful about purple storms.
-//     </div>
-//     <div class="card-footer">Created by: Sheldon</div>
-//     </div>
-//     <div class="card">
-//     <img src="../img/list_images/list_img_05.jpg" class='card-header col-lg-12' alt="There is supposed to be an image here">
-//     <div class="card-body">
-//         Computer chips are the future of all things progressive in technology. However, innovation away from these marvels should
-//         not be feared. The future is unkown, and we should all be ready to embrace whatever change comes our way.
-//     </div>
-//     <div class="card-footer">Created by: Sheldon</div>
-//     </div>
-//     <div class="card">
-//     <img src="../img/list_images/lilst_img_06.jpg" class='card-header col-lg-12' alt="There is supposed to be an image here">
-//     <div class="card-body">
-//         “You won’t ever know if what you did personally helped … When the best way to save lives is to prevent a disease 
-//         rather than treat it, success often looks like an overreaction.”
-//     </div>
-//     <div class="card-footer">Created by: Sheldon</div>
-//     </div>`
-// }
+function sortByAuthor() {
+    let newCardArray = []
+    let titles = []
+    listItem.forEach(card => {
+        titles.push(card.author)
+    })
+
+    // Here we have all the names in order. We should get only a unique list first.
+    distinctTitles = [...new Set(titles)]
+    distinctTitles.sort()
+
+    distinctTitles.forEach(title => {
+        listItem.forEach(item => {
+            if ( item.author == title )
+                newCardArray.push( item )
+        })
+    })
+    console.log(newCardArray)
+    myStorage.setItem('listItem', JSON.stringify(newCardArray))
+    reloadAllHTML() 
+}
+
+function sortByDesc() {
+    arr = JSON.parse(myStorage.getItem('listItem'))
+
+    arr.sort((a,b) => {a.desc - b.desc})
+    listItem = arr
+    console.log(listItem)
+ 
+    myStorage.setItem('listItem', JSON.stringify(listItem))
+}
+
+function createPages() {
+    if ( (listItem.length / 6) > 1 && (listItem % 6) > 0 ) {
+        numberOfPages = (listItem.length / 6) + 1
+    } else if ( (listItem / 6) > 1 ) {
+        numberOfPages = (listItem.length / 6) 
+    } else {
+        numberOfPages = 1
+    }
+    console.log(numberOfPages)
+    generateHTMLForPages();
+}
+
+function generateHTMLForPages() {
+    for ( i = 0 ; i < numberOfPages; i++ ) {
+        element = document.createElement('li')
+        element.classList.add('page-item')
+
+        if ( i == 0 ) element.classList.add('disabled')
+
+        pageLink = document.createElement('div')
+        pageLink.id = 'page' + String(i+1)
+        pageLink.classList.add('page-link')
+        text = document.createTextNode( String(i+1) )
+        pageLink.appendChild(text)
+
+        element.appendChild(pageLink)
+        listPagination.appendChild(element)
+    }
+}

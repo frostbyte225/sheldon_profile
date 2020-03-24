@@ -45,7 +45,23 @@
         </nav>
     </div>
 
+    <div class="container align-text-right" id="sort-container">
+        <label for="select-sort">Sort by...</label>
+        <select class="select-sort" id='select-to-sort'>
+            <option value="author" id='sort-by-author' selected>Author</option>
+            <option value="description" id='sort-by-desc'>Descripton</option>
+          </select>
+    </div>
+
     <div class="container card-columns" id='list-container'>
+    </div>
+
+    <div class="container" id="pagination">
+        <h3>Page(s)...</h3>
+        <nav aria-label="...">
+            <ul class="pagination pagination-md" id='list-pagination'>
+            </ul>
+          </nav>
     </div>
 
     <div class="container button-container" id='form-container'>
