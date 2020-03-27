@@ -6,7 +6,6 @@ numberOfPages = 0
 
 listItem = []
 listPagination = document.getElementById('list-pagination')
-createPages()
 
 pushMoreElements()
 myStorage.setItem('listItem', JSON.stringify(listItem))
@@ -67,10 +66,6 @@ addElementButton.addEventListener('click', () => {
     createFormListener()
 })
 
-function doSomething() {
-    console.log('clicked doSomething()')
-}
-
 function createFormListener() {
     console.log('created Form Listener')
     submitButton = document.getElementById('submitButton')
@@ -92,7 +87,7 @@ function createFormListener() {
             'file'  : file
         })
         myStorage.setItem('listItem', JSON.stringify(listItem))
-        reloadHTML()
+        reloadAllHTML()
     })
 }
 
@@ -132,7 +127,14 @@ function  reloadHTML() {
 function reloadAllHTML() {
     listContainer.innerHTML = ``
     arr = JSON.parse(myStorage.getItem('listItem'))
-    arr.forEach(element => {
+    console.log('current page value for reload is: ' + currentPage)
+    loadIndexMin = (currentPage - 1) * elementPerPage
+    loadIndexMax = ((currentPage - 1) * elementPerPage) + 6
+    if (loadIndexMax > arr.length) 
+        loadIndexMax = arr.length
+    for ( i = loadIndexMin; i < loadIndexMax; i++ ) {
+        element = arr[i]
+
         cardDiv = document.createElement('div')
         cardDiv.classList.add('card')
     
@@ -160,7 +162,8 @@ function reloadAllHTML() {
         cardDiv.appendChild(cardFooter)
     
         listContainer.appendChild(cardDiv)
-    })
+    }
+    paginate();
 }
 
 reloadAllHTML();
@@ -231,32 +234,44 @@ function sortByDesc() {
     myStorage.setItem('listItem', JSON.stringify(listItem))
 }
 
-function createPages() {
-    if ( (listItem.length / 6) > 1 && (listItem % 6) > 0 ) {
-        numberOfPages = (listItem.length / 6) + 1
-    } else if ( (listItem / 6) > 1 ) {
-        numberOfPages = (listItem.length / 6) 
-    } else {
-        numberOfPages = 1
+function generatePaginationHTML ( size ) {
+    listPagination.innerHTML=''
+    pageElements = []
+    for ( i = 0; i < size ; i++ ) {
+        listElement = document.createElement('li')
+        textNode = document.createTextNode( i + 1 )
+        link = document.createElement('a')
+
+        link.classList.add('page-link')
+        // link.href =
+        link.setAttribute('id','list-item-' + i) 
+        link.appendChild(textNode)
+        listElement.classList.add('page-item')
+        listElement.appendChild(link)
+        pageElements.push(listElement)
     }
-    console.log(numberOfPages)
-    generateHTMLForPages();
+    pageElements.forEach( element => {
+        listPagination.appendChild(element)
+    })
+
+    for ( i = 0; i < size; i++ ) {
+        const element = document.getElementById('list-item-' + i)
+        console.log('creating one event listener')
+        element.addEventListener('click', () => {
+            currentPage = Number(element.innerHTML)
+            console.log('printing element value: ' + element.innerHTML)
+            reloadAllHTML();
+        })
+    }
 }
 
-function generateHTMLForPages() {
-    for ( i = 0 ; i < numberOfPages; i++ ) {
-        element = document.createElement('li')
-        element.classList.add('page-item')
-
-        if ( i == 0 ) element.classList.add('disabled')
-
-        pageLink = document.createElement('div')
-        pageLink.id = 'page' + String(i+1)
-        pageLink.classList.add('page-link')
-        text = document.createTextNode( String(i+1) )
-        pageLink.appendChild(text)
-
-        element.appendChild(pageLink)
-        listPagination.appendChild(element)
-    }
+function paginate() {
+    // Step one: 
+    //      - Determine how many pages there should be based on total # of elements.
+    // Step Two:
+    //      - Generate only the elements within the index range per page.
+    arr = JSON.parse(myStorage.getItem('listItem'))
+    numberOfPages = Math.ceil(arr.length / elementPerPage)
+    console.log('number of pages before modulation: ' + numberOfPages)
+    generatePaginationHTML( numberOfPages )
 }

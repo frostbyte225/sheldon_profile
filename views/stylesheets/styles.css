@@ -175,3 +175,17 @@ select {
     max-width: inherit;
     max-height: inherit;
 }
+
+#pagination nav{
+    margin: auto;
+    text-align: center;
+}
+
+.page-item, .page-link {
+    background-color: #333;
+}
+
+.page-item:hover, .page-link:hover {
+    background-color: black;
+    cursor: pointer;
+}
