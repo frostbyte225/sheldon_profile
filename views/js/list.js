@@ -243,7 +243,7 @@ function generatePaginationHTML ( size ) {
         link = document.createElement('a')
 
         link.classList.add('page-link')
-        // link.href =
+        // link.href = 
         link.setAttribute('id','list-item-' + i) 
         link.appendChild(textNode)
         listElement.classList.add('page-item')
